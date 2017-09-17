@@ -19,8 +19,8 @@ class SequelizeExpress
             data = _.pick req.body, @attributes
 
             # Create the object
-            @model.create(data).then (object) ->
-                object.reload().then ->
+            @model.create(data).then (object) =>
+                object.reload().then =>
                     req[@options.data_attribute] = object
                     return next()
                 .catch (err) ->
@@ -34,7 +34,7 @@ class SequelizeExpress
 
             if id
                 # Get the model by id
-                @model.findById(id).then (object) ->
+                @model.findById(id).then (object) =>
                     if object
                         req[@options.data_attribute] = object
                         return next()
@@ -45,7 +45,7 @@ class SequelizeExpress
                 .catch (err) ->
                     return next err
             else
-                @model.findAll().then (objects) ->
+                @model.findAll().then (objects) =>
                     req[@options.data_attribute] = objects
                     return next()
                 .catch (err) ->
@@ -70,7 +70,7 @@ class SequelizeExpress
                             _.assign object, data
 
                             # Save the object
-                            object.save().then ->
+                            object.save().then =>
                                 req[@options.data_attribute] = object
                                 return next()
                             .catch (err) ->
